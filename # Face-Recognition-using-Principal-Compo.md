@@ -22,6 +22,7 @@ in 4 digits ex: Winona_Ryder_0012.jpg to represent 12th image of Winona Ryder.
 of each image is (slice(0, 250), slice(0, 250)) i.e., complete 250x250 pixels.
 - Associated Metadata: Training and Testing datasets are provided in the form of various csv files (containing
 the person name and image-no. of that person).
+- [Dataset link](https://github.com/dhyeyinf/Face_Identification/tree/main/Dataset)
 
 ### Tasks Performed
 1. Loading dataset and divide the date into training and test sets. 
