@@ -48,3 +48,29 @@ image_file = '/content/AJ_Lamas_0001.jpg'
 img = cv2.imread(image_file)
 lbpFeature=calcLBP(img)
 #print(lbpFeature)
+
+from skimage.io import imread
+from skimage.transform import resize
+from skimage.feature import hog
+import matplotlib.pyplot as plt
+
+
+def compute_hog(img):
+    # resizing image
+    resized_img = resize(img, (64 * 4, 64 * 4))
+    # creating hog features
+    fd, hog_image = hog(resized_img, orientations=9, pixels_per_cell=(8, 8),
+                        cells_per_block=(2, 2), visualize=True, multichannel=True)
+    return fd, hog_image
+
+# reading the image
+img = imread('/content/Yuvraj_Singh_0001.jpg')
+Hog_feature, hog_image = compute_hog(img)
+print(Hog_feature.shape)
+
+# Display HoG image
+plt.imshow(hog_image, cmap='gray')
+plt.title('HoG Image')
+plt.axis('off')
+plt.show()
+
