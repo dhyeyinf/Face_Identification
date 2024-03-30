@@ -12,14 +12,17 @@ The goal of implementing this system is to recognize a person's face by comparin
 
 
 ### About the dataset: 
-The AT&T face dataset contains a set of grayscale face images with dimensions 92x112. There is a folder in this repo named AT&T from which we have loaded our dataset.
-The images are organised in 40 directories (one for each subject), which have names of the form sX, where X indicates the subject number (between 1 and 40). 
-In each of these directories, there are ten different images of that subject, which have names of the form Y.pgm, where Y is the image number for that subject (between 1 and 10). 
-These 10 images per person are taken at different times, varying the lighting, facial expressions (open / closed eyes, smiling / not smiling) and facial details (glasses / no glasses). 
-All the images were taken against a dark homogeneous background with the subjects in an upright, frontal position (with tolerance for some side movement). 
-<b>Link:</b> [https://git-disl.github.io/GTDLBench/datasets/att_face_dataset/](https://git-disl.github.io/GTDLBench/datasets/att_face_dataset/)
-
-
+The provided dataset is the deep funneled version of the original LFW dataset (Labelled Faces in the Wild dataset
+with 13233 images of 5749 people), i.e., it includes images that have been aligned using various techniques to improve
+face alignment and normalization. The brief dataset description can be found as follows:
+- Image Information
+  - File Format: Every file is a jpg file in the format: <person_name>_<image_count>, where image count is
+in 4 digits ex: Winona_Ryder_0012.jpg to represent 12th image of Winona Ryder.
+  - Slicing: Since these images are already pre-processed, no slicing needs to be done, i.e., the default slice
+of each image is (slice(0, 250), slice(0, 250)) i.e., complete 250x250 pixels.
+- Associated Metadata: Training and Testing datasets are provided in the form of various csv files (containing
+the person name and image-no. of that person).
+- [Dataset link](https://github.com/dhyeyinf/Face_Identification/tree/main/Dataset)
 
 ### Tasks Performed
 1. Loading dataset and divide the date into training and test sets. 
