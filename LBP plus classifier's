@@ -1,0 +1,51 @@
+from skimage.feature import local_binary_pattern
+from skimage.feature import hog
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+from skimage.color import rgb2gray
+
+def extract_lbp_features(images):
+    lbp_features = []
+    for img in images:
+        gray_img = rgb2gray(img)
+        lbp = local_binary_pattern(gray_img, P=8, R=1, method='uniform')
+        hist, _ = np.histogram(lbp.ravel(), bins=np.arange(0, 10), range=(0, 10))
+        lbp_features.append(hist)
+    return np.array(lbp_features)
+lbp_train_features = extract_lbp_features(X_train_filtered)
+lbp_test_features = extract_lbp_features(X_test_filtered)
+import numpy as np
+np.save('lbp_train_features.npy', lbp_train_features)
+np.save('lbp_test_features.npy', lbp_test_features)
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import GradientBoostingClassifier
+
+svm_classifier = SVC()
+svm_classifier.fit(lbp_train_features, y_train_filtered)
+svm_pred = svm_classifier.predict(lbp_test_features)
+svm_accuracy = accuracy_score(y_test_filtered, svm_pred)
+print("LBP feature extracted Accuracy:",svm_accuracy)
+
+rf_classifier = RandomForestClassifier()
+rf_classifier.fit(lbp_train_features, y_train_filtered)
+rf_pred = rf_classifier.predict(lbp_test_features)
+rf_accuracy = accuracy_score(y_test_filtered, rf_pred)
+print("Random Forest Classifier Accuracy:", rf_accuracy)
+
+knn_classifier = KNeighborsClassifier()
+knn_classifier.fit(lbp_train_features, y_train_filtered)
+knn_pred = knn_classifier.predict(lbp_test_features)
+knn_accuracy = accuracy_score(y_test_filtered, knn_pred)
+print("KNN Classifier Accuracy:", knn_accuracy)
+
+gb_classifier = GradientBoostingClassifier()
+gb_classifier.fit(lbp_train_features, y_train_filtered)
+gb_pred = gb_classifier.predict(lbp_test_features)
+gb_accuracy = accuracy_score(y_test_filtered, gb_pred)
+print("Gradient Boosting Classifier Accuracy:", gb_accuracy)
