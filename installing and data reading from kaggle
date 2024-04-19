@@ -1,0 +1,85 @@
+!pip install kaggle
+!pip install tensorflow
+# Install OpenCV if not already installed
+!pip install opencv-python-headless
+
+# Import cv2
+import cv2
+!mkdir ~/.kaggle
+!mv kaggle.json ~/.kaggle/
+!chmod 600 ~/.kaggle/kaggle.json
+!kaggle datasets download -d jessicali9530/lfw-dataset -p /datasets
+!unzip /datasets/lfw-dataset.zip -d /datasets/lfw-dataset
+
+import os
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+
+# Constants
+DATA_DIR = '/datasets/lfw-dataset/lfw-deepfunneled/lfw-deepfunneled'
+IMAGE_SIZE = (50, 50)
+# Load images and labels
+data = []
+labels = []
+
+for person_dir in os.listdir(DATA_DIR):
+    if os.path.isdir(os.path.join(DATA_DIR, person_dir)):
+        for image_file in os.listdir(os.path.join(DATA_DIR, person_dir)):
+            image_path = os.path.join(DATA_DIR, person_dir, image_file)
+            image = cv2.imread(image_path)
+            if image is not None:
+                image = cv2.resize(image, IMAGE_SIZE)
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert BGR to RGB
+                image = image / 255.0  # Normalize pixel values
+                data.append(image)
+                labels.append(person_dir)
+
+# Convert lists to numpy arrays
+data = np.array(data)
+labels = np.array(labels)
+
+# Debugging: Print number of samples and unique labels
+print("Number of samples:", len(data))
+print("Number of unique labels:", len(np.unique(labels)))
+
+# Perform train-test split
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+
+
+# Filter out classes with only one sample in the training data
+unique_labels_train, label_counts_train = np.unique(y_train, return_counts=True)
+filtered_labels_train = unique_labels_train[label_counts_train > 40]
+
+# Filter the training data and labels based on the remaining classes
+filtered_indices_train = np.isin(y_train, filtered_labels_train)
+X_train_filtered = X_train[filtered_indices_train]
+y_train_filtered = y_train[filtered_indices_train]
+
+# Verify the shape of filtered training data
+print("Shape of filtered training data:", X_train_filtered.shape)
+print("Shape of filtered training labels:", y_train_filtered.shape)
+
+# Filter out classes with only one sample in the test data
+unique_labels_test, label_counts_test = np.unique(y_test, return_counts=True)
+filtered_labels_test = unique_labels_test[label_counts_test > 40]
+
+# Filter the test data and labels based on the remaining classes
+filtered_indices_test = np.isin(y_test, filtered_labels_test)
+X_test_filtered = X_test[filtered_indices_test]
+y_test_filtered = y_test[filtered_indices_test]
+
+# Verify the shape of filtered test dataMB
+print("Shape of filtered test data:", X_test_filtered.shape)
+print("Shape of filtered test labels:", y_test_filtered.shape)
+
+import numpy as np
+
+# Unique labels in filtered training data
+unique_labels_train_filtered = np.unique(y_train_filtered)
+print("Unique labels in filtered training data:", unique_labels_train_filtered)
+
+# Unique labels in filtered test data
+unique_labels_test_filtered = np.unique(y_test_filtered)
+print("Unique labels in filtered test data:", unique_labels_test_filtered)
