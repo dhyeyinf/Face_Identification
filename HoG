@@ -24,3 +24,5 @@ plt.title('HoG Image')
 plt.axis('off')
 plt.show()
 
+
+#hello 
