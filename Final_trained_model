@@ -1,0 +1,40 @@
+import joblib
+import numpy as np
+from PIL import Image
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+
+# Load LDA model
+lda = joblib.load('lda_model.pkl')
+
+# Load SVM model
+svm_model = joblib.load('svm_model.pkl')
+
+# Load and preprocess the test image
+test_image_path = "/content/test.jpg"  # Update with the path to your image
+image = Image.open(test_image_path)
+resized_image = image.resize((50, 50))
+image_array = np.array(resized_image)
+flat_image_array = image_array.flatten()
+test_features = flat_image_array.reshape(1, -1)
+test_lda = lda.transform(test_features)
+
+# Predict using the loaded SVM model
+test_pred = svm_model.predict(test_lda).reshape(-1, 1)
+print("Prediction:", test_pred)
+
+import csv
+
+# Initialize an empty list to store the unique labels
+unique_labels_list = []
+
+# Read the CSV file
+with open('unique_labels.csv', 'r') as file:
+    reader = csv.reader(file)
+    # Skip the header row
+    next(reader)
+    # Read each row and append the label to the list
+    for row in reader:
+        unique_labels_list.append(row[0])
+
+print("List of unique labels from 'unique_train_labels.csv':", unique_labels_list)
+print(unique_labels_list[test_pred[0][0]])
