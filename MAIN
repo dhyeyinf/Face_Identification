@@ -291,3 +291,111 @@ y_pred = svm_model.predict(X_test_lda)
 accuracy = accuracy_score(y_test_filtered, y_pred)
 print("Model accuracy:", accuracy)
 
+
+from skimage.feature import local_binary_pattern
+from skimage.feature import hog
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+from skimage.color import rgb2gray
+
+def extract_lbp_features(images):
+    lbp_features = []
+    for img in images:
+        gray_img = rgb2gray(img)
+        lbp = local_binary_pattern(gray_img, P=8, R=1, method='uniform')
+        hist, _ = np.histogram(lbp.ravel(), bins=np.arange(0, 10), range=(0, 10))
+        lbp_features.append(hist)
+    return np.array(lbp_features)
+
+lbp_train_features = extract_lbp_features(X_train_filtered)
+lbp_test_features = extract_lbp_features(X_test_filtered)
+
+import numpy as np
+np.save('lbp_train_features.npy', lbp_train_features)
+np.save('lbp_test_features.npy', lbp_test_features)
+
+from sklearn.metrics import accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+
+# Support Vector Machine (SVM) Classifier
+svm_classifier = SVC()
+svm_classifier.fit(lbp_train_features, y_train_filtered)
+svm_train_pred = svm_classifier.predict(lbp_train_features)
+svm_test_pred = svm_classifier.predict(lbp_test_features)
+svm_train_accuracy = accuracy_score(y_train_filtered, svm_train_pred)
+svm_test_accuracy = accuracy_score(y_test_filtered, svm_test_pred)
+print("SVM Classifier Training Accuracy:", svm_train_accuracy)
+print("SVM Classifier Testing Accuracy:", svm_test_accuracy)
+
+# Random Forest Classifier
+rf_classifier = RandomForestClassifier()
+rf_classifier.fit(lbp_train_features, y_train_filtered)
+rf_train_pred = rf_classifier.predict(lbp_train_features)
+rf_test_pred = rf_classifier.predict(lbp_test_features)
+rf_train_accuracy = accuracy_score(y_train_filtered, rf_train_pred)
+rf_test_accuracy = accuracy_score(y_test_filtered, rf_test_pred)
+print("Random Forest Classifier Training Accuracy:", rf_train_accuracy)
+print("Random Forest Classifier Testing Accuracy:", rf_test_accuracy)
+
+# K-Nearest Neighbors (KNN) Classifier
+knn_classifier = KNeighborsClassifier()
+knn_classifier.fit(lbp_train_features, y_train_filtered)
+knn_train_pred = knn_classifier.predict(lbp_train_features)
+knn_test_pred = knn_classifier.predict(lbp_test_features)
+knn_train_accuracy = accuracy_score(y_train_filtered, knn_train_pred)
+knn_test_accuracy = accuracy_score(y_test_filtered, knn_test_pred)
+print("KNN Classifier Training Accuracy:", knn_train_accuracy)
+print("KNN Classifier Testing Accuracy:", knn_test_accuracy)
+
+# Gradient Boosting Classifier
+gb_classifier = GradientBoostingClassifier()
+gb_classifier.fit(lbp_train_features, y_train_filtered)
+gb_train_pred = gb_classifier.predict(lbp_train_features)
+gb_test_pred = gb_classifier.predict(lbp_test_features)
+gb_train_accuracy = accuracy_score(y_train_filtered, gb_train_pred)
+gb_test_accuracy = accuracy_score(y_test_filtered, gb_test_pred)
+print("Gradient Boosting Classifier Training Accuracy:", gb_train_accuracy)
+print("Gradient Boosting Classifier Testing Accuracy:", gb_test_accuracy)
+
+from sklearn.linear_model import LogisticRegression
+
+# Logistic Regression Classifier
+lr_classifier = LogisticRegression(max_iter=500)
+lr_classifier.fit(lbp_train_features, y_train_filtered)
+lr_train_pred = lr_classifier.predict(lbp_train_features)
+lr_test_pred = lr_classifier.predict(lbp_test_features)
+lr_train_accuracy = accuracy_score(y_train_filtered, lr_train_pred)
+lr_test_accuracy = accuracy_score(y_test_filtered, lr_test_pred)
+print("Logistic Regression Classifier Training Accuracy:", lr_train_accuracy)
+print("Logistic Regression Classifier Testing Accuracy:", lr_test_accuracy)
+
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+lbp_train_features = lbp_train_features.reshape(X_train_filtered.shape[0], -1)
+lbp_test_features = lbp_test_features.reshape(X_test_filtered.shape[0], -1)
+
+lda = LDA(n_components=None)
+X_train_lda = lda.fit_transform(lbp_train_features, y_train_filtered)
+X_test_lda = lda.transform(lbp_test_features)
+
+classifiers = {
+    'SVM': SVC(),
+    'Random Forest': RandomForestClassifier(),
+    'KNN': KNeighborsClassifier(),
+    'Gradient Boosting': GradientBoostingClassifier()
+}
+
+for clf_name, clf in classifiers.items():
+    clf.fit(X_train_lda, y_train_filtered)
+    y_pred = clf.predict(X_test_lda)
+    accuracy = accuracy_score(y_test_filtered, y_pred)
+    print(f"{clf_name} accuracy:", accuracy)
+
