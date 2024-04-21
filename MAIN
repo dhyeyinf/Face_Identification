@@ -398,4 +398,35 @@ for clf_name, clf in classifiers.items():
     y_pred = clf.predict(X_test_lda)
     accuracy = accuracy_score(y_test_filtered, y_pred)
     print(f"{clf_name} accuracy:", accuracy)
+#hog
+from skimage.feature import hog
+import numpy as np
 
+def extract_hog_features(images, orientations=9, pixels_per_cell=(4, 4),
+                         cells_per_block=(2, 2), block_norm='L2-Hys',
+                         visualize=False, transform_sqrt=False,
+                         feature_vector=True, multichannel=True,
+                         channel_axis=-1):
+    hog_features = []
+    for img in images:
+        # Compute HOG features with specified parameters
+        hog_feature = hog(img, orientations=orientations,
+                          pixels_per_cell=pixels_per_cell,
+                          cells_per_block=cells_per_block,
+                          block_norm=block_norm,
+                          visualize=visualize, transform_sqrt=transform_sqrt,
+                          feature_vector=feature_vector, multichannel=multichannel,
+                          channel_axis=channel_axis)  # Specify the channel axis
+        hog_features.append(hog_feature)
+    return np.array(hog_features)
+
+# Example usage:
+# hog_features = extract_hog_features(images, orientations=18, pixels_per_cell=(16, 16), cells_per_block=(3, 3))
+
+
+hog_train_features = extract_hog_features(X_train_filtered)
+hog_test_features = extract_hog_features(X_test_filtered)
+
+import numpy as np
+np.save('hog_train_features.npy', hog_train_features)
+np.save('hog_test_features.npy', hog_test_features)
