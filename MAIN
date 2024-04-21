@@ -1,1 +1,28 @@
-#whole code for the all the feature extractions(LDA,PCA,CNN,LBP,HOG) is below.
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+
+DATA_DIR = '/datasets/lfw-dataset/lfw-deepfunneled/lfw-deepfunneled'
+
+# Get all the person labels
+labels = []
+for person_dir in os.listdir(DATA_DIR):
+    if os.path.isdir(os.path.join(DATA_DIR, person_dir)):
+        num_images = len(os.listdir(os.path.join(DATA_DIR, person_dir)))
+        if num_images > 5:
+            labels.append(person_dir)
+
+# Count the occurrences of each label
+label_counts = {label: 0 for label in labels}
+for label in labels:
+    label_counts[label] = len(os.listdir(os.path.join(DATA_DIR, label)))
+
+# Plot the histogram
+plt.figure(figsize=(10, 6))
+plt.bar(range(len(label_counts)), label_counts.values(), align='center', alpha=0.7)
+plt.xticks(range(len(label_counts)), label_counts.keys(), rotation=90)
+plt.xlabel('Person Name')
+plt.ylabel('Number of Photos')
+plt.title('Number of Photos per Person')
+plt.tight_layout()
+plt.show()
