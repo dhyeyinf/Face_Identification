@@ -26,3 +26,145 @@ plt.ylabel('Number of Photos')
 plt.title('Number of Photos per Person')
 plt.tight_layout()
 plt.show()
+
+import os
+import cv2
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+DATA_DIR = '/datasets/lfw-dataset/lfw-deepfunneled/lfw-deepfunneled'
+IMAGE_SIZE = (50, 50)
+
+data = []
+labels = []
+
+# Iterate through each person's directory in the dataset
+for person_dir in os.listdir(DATA_DIR):
+    if os.path.isdir(os.path.join(DATA_DIR, person_dir)):
+        # Count the number of images for the current person
+        num_images = len(os.listdir(os.path.join(DATA_DIR, person_dir)))
+
+        # Only include classes with more than 70 images
+        if num_images > 70:
+            for image_file in os.listdir(os.path.join(DATA_DIR, person_dir)):
+                image_path = os.path.join(DATA_DIR, person_dir, image_file)
+                image = cv2.imread(image_path)
+                if image is not None:
+                    image = cv2.resize(image, IMAGE_SIZE)
+                    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                    # image = image / 255.0  # Normalize pixel values
+                    data.append(image)
+                    labels.append(person_dir)
+
+# Convert lists to numpy arrays
+data = np.array(data)
+labels = np.array(labels)
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+
+print("Number of samples:", len(data))
+print("Number of unique labels:", len(np.unique(labels)))
+
+print("Shape of filtered training data:", X_train.shape)
+print("Shape of filtered training labels:", y_train.shape)
+print("Shape of filtered test data:", X_test.shape)
+print("Shape of filtered test labels:", y_test.shape)
+
+unique_labels_train, label_counts_train = np.unique(y_train, return_counts=True)
+filtered_labels_train = unique_labels_train[label_counts_train > 0]
+
+filtered_indices_train = np.isin(y_train, filtered_labels_train)
+X_train_filtered = X_train[filtered_indices_train]
+y_train_filtered = y_train[filtered_indices_train]
+
+print("Shape of filtered training data:", X_train_filtered.shape)
+print("Shape of filtered training labels:", y_train_filtered.shape)
+
+unique_labels_test, label_counts_test = np.unique(y_test, return_counts=True)
+filtered_labels_test = unique_labels_test[label_counts_test > 0]
+
+filtered_indices_test = np.isin(y_test, filtered_labels_test)
+X_test_filtered = X_test[filtered_indices_test]
+y_test_filtered = y_test[filtered_indices_test]
+
+print("Shape of filtered test data:", X_test_filtered.shape)
+print("Shape of filtered test labels:", y_test_filtered.shape)
+
+import numpy as np
+
+unique_labels_train_filtered = np.unique(y_train_filtered)
+print("Unique labels in filtered training data:", unique_labels_train_filtered)
+
+unique_labels_test_filtered = np.unique(y_test_filtered)
+print("Unique labels in filtered test data:", unique_labels_test_filtered)
+
+import csv
+import numpy as np
+
+# Assuming y_train_filtered is your array of labels
+y_train_filtered = np.array(['Ariel_Sharon', 'Colin_Powell', 'Donald_Rumsfeld', 'George_W_Bush',
+ 'Gerhard_Schroeder', 'Hugo_Chavez', 'Tony_Blair'])
+
+unique_labels_train_filtered = np.unique(y_train_filtered)
+
+# Specify the file path
+csv_file_path = "unique_labels.csv"
+
+# Write the unique labels to a CSV file
+with open(csv_file_path, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Unique labels"])
+    for label in unique_labels_train_filtered:
+        writer.writerow([label])
+
+print("Unique labels saved to", csv_file_path)
+
+unique_labels_train, label_counts_train = np.unique(y_train, return_counts=True)
+filtered_labels_train = unique_labels_train[label_counts_train > 0]
+
+filtered_indices_train = np.isin(y_train, filtered_labels_train)
+X_train_filtered = X_train[filtered_indices_train]
+y_train_filtered = y_train[filtered_indices_train]
+
+print("Shape of filtered training data:", X_train_filtered.shape)
+print("Shape of filtered training labels:", y_train_filtered.shape)
+
+unique_labels_test, label_counts_test = np.unique(y_test, return_counts=True)
+filtered_labels_test = unique_labels_test[label_counts_test > 0]
+
+filtered_indices_test = np.isin(y_test, filtered_labels_test)
+X_test_filtered = X_test[filtered_indices_test]
+y_test_filtered = y_test[filtered_indices_test]
+
+print("Shape of filtered test data:", X_test_filtered.shape)
+print("Shape of filtered test labels:", y_test_filtered.shape)
+
+import numpy as np
+
+unique_labels_train_filtered = np.unique(y_train_filtered)
+print("Unique labels in filtered training data:", unique_labels_train_filtered)
+
+unique_labels_test_filtered = np.unique(y_test_filtered)
+print("Unique labels in filtered test data:", unique_labels_test_filtered)
+
+import csv
+import numpy as np
+
+# Assuming y_train_filtered is your array of labels
+y_train_filtered = np.array(['Ariel_Sharon', 'Colin_Powell', 'Donald_Rumsfeld', 'George_W_Bush',
+ 'Gerhard_Schroeder', 'Hugo_Chavez', 'Tony_Blair'])
+
+unique_labels_train_filtered = np.unique(y_train_filtered)
+
+# Specify the file path
+csv_file_path = "unique_labels.csv"
+
+# Write the unique labels to a CSV file
+with open(csv_file_path, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Unique labels"])
+    for label in unique_labels_train_filtered:
+        writer.writerow([label])
+
+print("Unique labels saved to", csv_file_path)
