@@ -1,0 +1,446 @@
+/* Importing Google Font */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  padding: 8px 16px;
+  margin-bottom: 0;
+  font-size: 16px;
+  line-height: normal;
+  color: #333333;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0);
+  border: 1px solid #e6e6e6;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+/* Button hover and active states */
+.btn:hover,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled] {
+  background-color: #e6e6e6;
+}
+
+/* Large button styles */
+.btn-large {
+  padding: 12px 24px;
+  font-size: 18px;
+  line-height: normal;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* Button hover effect */
+.btn:hover {
+  color: #313131;
+  text-decoration: none;
+  background-color: #07f907;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+  -moz-transition: background-position 0.1s linear;
+  -ms-transition: background-position 0.1s linear;
+  -o-transition: background-position 0.1s linear;
+  transition: background-position 0.1s linear;
+}
+
+/* Primary button styles */
+.btn-primary,
+.btn-primary:hover {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.btn-primary.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.btn-primary {
+  background-color: #4a77d4;
+  background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4);
+  background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4));
+  background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4);
+  background-image: -o-linear-gradient(top, #6eb6de, #4a77d4);
+  background-image: linear-gradient(top, #6eb6de, #4a77d4);
+  background-repeat: repeat-x;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);
+  border: 1px solid #3762bc;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Primary button hover and active states */
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  filter: none;
+  background-color: #4a77d4;
+}
+
+/* Block level button styles */
+.btn-block {
+  width: 100%;
+  display: block;
+}
+
+/* Common styles */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Styling for HTML and body elements */
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#video-background {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -100;
+	background-size: cover;
+  }
+  
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-image: url("https://wallpaperaccess.com/full/10450447.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+  font-size: 22px;
+  text-align: center;
+  letter-spacing: 1.3px;
+  overflow: hidden;
+}
+
+/* Login form styling */
+.login {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin: -150px 0 0 -150px;
+  width: 400px;
+  height: 400px;
+}
+
+/* Header text styling */
+.login h1 {
+	color: #fff;
+	text-shadow: 0 0 5px rgba(0,0,0,0.3);
+	letter-spacing: 1px;
+	text-align: left; /* Align the text to the left */
+	font-family: 'Anonymous Pro', monospace;
+	position: absolute;
+	top: 1px; /* Adjust top position */
+	left: -600px; /* Adjust left position */
+}
+
+/* Input field styling */
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.5s ease;
+}
+
+/* Input field focus styling */
+input:focus {
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Drag and drop area styling */
+.drop-area {
+	border: 2px dashed #fbfafa;
+	border-radius: 30px;
+	width: 500px; /* Increase the width */
+	height: 380px; /* Increase the height */
+	margin: 30px auto;
+	text-align: center;
+	font-size: 36px; /* Increase the font size */
+	line-height: 200px; /* Adjust line height */
+	margin-left: 350px; 
+	margin-top: 80px; 
+	animation: pulse 2s infinite; /* Add animation */
+}
+
+/* Manual choose button styling */
+.manual-choose-button {
+	display: block;
+	width: 200px; /* Adjust width */
+	margin: 10px auto; /* Center horizontally with margin */
+	padding: 12px 24px; /* Adjust padding */
+	font-size: 18px; /* Adjust font size */
+	border-radius: 10px; /* Adjust border radius */
+	background-color: #4a77d4; /* Button background color */
+	color: #0bf150; /* Button text color */
+	border: none; /* Remove border */
+	cursor: pointer;
+	transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Manual choose button hover state styling */
+.manual-choose-button:hover {
+	background-color: rgb(17, 109, 239); /* Change background color on hover */
+}
+
+/* Additional CSS for top-left text */
+.top-left-text {
+  position: absolute;
+  top: -100px;
+  left: 0px;
+  color: rgb(202, 250, 6);
+  font-size: 60px;
+  font-weight: bold; /* Making the text bold */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Choosing a different stylish font */
+}
+
+
+/* Additional CSS for upload button */
+.upload-button {
+	width: 200px; /* Adjusted width */
+	display: block;
+	position: absolute; /* Positioning */
+	left: -400px; /* Move to the horizontal center */
+	bottom: -80px; /* Align with the bottom */
+	transform: translateX(-50%); /* Adjust horizontally to center */
+  }
+  
+
+/* Additional CSS for bottom-left text */
+.bottom-left-text {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	color: white;
+	font-size: 10px;
+}
+/* CSS for displaying the selected image */
+#image-preview {
+	position: absolute;
+	top: 150px; /* Adjust top position */
+	left: -400px; /* Adjust left position to center horizontally */
+	transform: translateX(-50%); /* Center the image horizontally */
+	text-align: center;
+}
+
+#image-preview img {
+	max-width: 250px; /* Set maximum width of the image */
+	max-height: 250px; /* Set maximum height of the image */
+}
+
+  
+  /* CSS for displaying file details */
+  #file-info {
+	color: #f50909;
+	text-shadow: 0 0 100px rgba(0,0,0,0.3);
+	letter-spacing: 1px;
+	font-size: 15px;
+	text-align: left; /* Align the text to the left */
+	font-family: 'Anonymous Pro', monospace;
+	position: absolute;
+	top: 500; /* Adjust top position */
+	left: -600px; /* Adjust left position */
+  }
+
+  #predicted-image {
+	position: absolute;
+	top: 150px; /* Same top position as the uploaded image */
+	left: 250px; /* Adjust left position to place it to the right of the uploaded image */
+	transform: translateX(-50%);
+	max-width: 250px; /* Set maximum width of the predicted image */
+	max-height: 250px; /* Set maximum height of the predicted image */
+  }
+  
+  #predicted-image img {
+	max-width: 100%; /* Ensure the image fits within the container */
+	max-height: 100%;
+  }
+  #prediction-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; /* Center the content horizontally */
+    padding: 20px; /* Add padding for spacing */
+    background-color: rgb(10, 9, 9); /* Set background color to non-transparent */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add box shadow for depth effect */
+    transition: transform 0.3s ease, font-size 0.3s ease; /* Smooth transition for transform and font-size */
+}
+
+#prediction-text:hover {
+    transform: translate(-50%, -50%) scale(2); /* Magnify the text when hovered */
+}
+
+
+  /* Arrow */
+  #show-widget {
+    position: fixed;
+    bottom: 50px; /* Adjust as needed */
+    right: 40px; /* Adjust as needed */
+    font-size: 50px; /* Adjust as needed */
+    background-color: transparent;
+    border: none;
+    color: white;
+    z-index: 9999; /* Ensure it's above other elements */
+    cursor: url('up_arrow.png'), auto; /* Use a custom cursor image for the upward position */
+    transition: transform 0.3s ease; /* Smooth transition for cursor rotation */
+}
+
+#show-widget.up {
+    transform: rotate(180deg) translateY(-100%); /* Rotate cursor and move widget upwards */
+}
+
+
+  #widget-container {
+    position: fixed;
+    bottom: -100%; /* Initially off the screen */
+    left: 0;
+    width: 100%; /* Full width of the page */
+    height: 50%; /* half of the page height */
+    background-color: rgb(11, 11, 11); /* Black background */
+    overflow-y: auto; /* Enable vertical scrolling */
+    transition: bottom 1s ease; /* Smooth transition for movement */
+    z-index: 1000; /* Ensure the widget is above other content */
+  }
+  
+  #widget-header h2 {
+	margin: 0; /* Removes margin from the header text */
+	font-size: 24px; /* Sets the font size of the header text */
+  }
+  
+/* Display creators in two lines */
+#widget-body {
+	display: flex;
+	flex-wrap: wrap; /* Wrap items to the next line */
+	justify-content: center; /* Center items horizontally */
+  }
+  
+  /* Style for each creator */
+  .creator {
+	text-align: center; /* Center align content */
+	margin: 10px; /* Add margin */
+	flex: 0 0 calc(33.33% - 20px); /* Set width for each creator */
+  }
+  
+  .creator img {
+	border-radius: 50%; /* Make images circular */
+	width: 150px; /* Adjust image width */
+	height: 150px; /* Adjust image height */
+  }
+  
+  .creator p {
+	margin-top: 10px; /* Add space between image and text */
+	color: white; /* Text color */
+  }
+  
+  
+ /* Style for the widget-footer */
+#widget-footer {
+	margin-top: 20px; /* Add space between creator section and links */
+  }
+  
+  /* Style for the important links */
+  #widget-footer h3 {
+	color: white; /* Text color */
+	font-size: 20px; /* Font size */
+	margin-bottom: 10px; /* Add space below the heading */
+  }
+  
+  #widget-footer ul {
+	list-style-type: none; /* Remove default list style */
+	padding: 0; /* Remove default padding */
+  }
+  
+  #widget-footer ul li {
+	margin-bottom: 10px; /* Add space between each link */
+  }
+  
+  #widget-footer ul li a {
+	color: #0853e8; /* Link color */
+	text-decoration: none; /* Remove default underline */
+	font-size: 16px; /* Font size */
+	display: flex; /* Use flexbox for layout */
+	align-items: center; /* Center vertically */
+  }
+  
+  #widget-footer ul li a:hover {
+	text-decoration: underline; /* Underline on hover */
+  }
+  
+  /* Style for the link icon */
+  .link-icon {
+	margin-right: 100px; /* Add space between icon and text */
+  }
+/* CSS for widget link */
+.widget-link {
+    display: inline-block;
+    color: #bcff02;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.widget-link:hover {
+    text-decoration: underline;
+}
+
+  
+/* Keyframes for pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
