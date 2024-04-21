@@ -1,0 +1,363 @@
+
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.cdnfonts.com/css/chalkduster" rel="stylesheet">
+<style>
+    @import url('https://fonts.cdnfonts.com/css/chalkduster');
+</style>
+<!-- <script src="./sm/assets/teaser-data.js"></script> -->
+
+
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="description"
+        content="Project page for &#39;Composite Sketch+Text Queries for Retrieving Objects with Elusive Names and Complex Interactions.&#39;">
+    <!-- <link rel="icon" href="./pics/wis_logo.jpg"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="description"
+        content="Project page for &#39;Composite Sketch+Text Queries for Retrieving Objects with Elusive Names and Complex Interactions.&#39;">
+
+
+      <meta charset="utf-8">
+      <meta name="description" content="Composite Sketch+Text Queries for Retrieving Objects with Elusive Names and Complex Interactions">
+       <meta name="keywords" content="sketch+text-based image retrieval, cross-modal retrieval, image retrieval, SBIR, CSTBIR;">
+      <meta name="author" content="Prajwal Gatti">
+      <title>[ PRML Project 2024] PRML Project </title>
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="[AAAI 2024] Composite Sketch+Text Queries for Retrieving Objects with Elusive Names and Complex Interactions" />
+      <meta name="twitter:description" content="[AAAI 2024] Composite Sketch+Text Queries for Retrieving Objects with Elusive Names and Complex Interactions" />
+      <meta name="twitter:image:alt" content="CSTBIR (AAAI 2024)" />
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <p class="title"> <br></p>
+    <div style="text-align: center; font-size: 15pt; margin-bottom: 15px">
+            <span><a href="https://colab.research.google.com/drive/1DCTUxwxdwarDcu594JngJcRiYjNKmijS#scrollTo=RDilC8BZiWkn">PRML Project</a></span>
+    </div>
+    <p class="author">
+        <span class="author"><a href="https://github.com/akspshat1">Akshat Patidar</a>&nbsp;<sup> |</sup></span>
+        <span class="author"><a href="https://github.com/manaschechani27">Manas Chechani</a>&nbsp;<sup> |</sup></span>
+        <span class="author"><a href="https://github.com/nisarg-vaghela17">Nisarg Vaghela</a>&nbsp;<sup> |</sup></span>
+        <span class="author"><a href="https://github.com/dhyeyinf">Dhyey Findoriya</a>&nbsp;<sup></sup> |</span>
+        <span class="author"><a href="https://github.com/ankit010IITJ">Ankit Raj</a>&nbsp;<sup></sup> |</span>
+    </p>
+    <style>
+        /* Custom carousel control icon style */
+        .custom-carousel-icon {
+            background-color: black;
+            width: 30px; /* Adjust width as needed */
+            height: 30px; /* Adjust height as needed */
+        }
+
+        /* Customizing the direction of the arrow */
+        .carousel-control-prev-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3e%3cpath d='M4 0L0 4l1.5 1.5 2.5-2.5V8h2V3L6.5 4.5 8 3 4 0z'/%3e%3c/svg%3e");
+        }
+
+        .carousel-control-next-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3e%3cpath d='M4 0l3 4-3 4-1.5-1.5L4.5 4 2.5 2.5 4 1z'/%3e%3c/svg%3e");
+        }
+    </style>
+
+    <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
+        <tbody>
+            <tr>
+                <td align="center">| <a href="./resources/paper.pdf">Report</a> | <a href="https://github.com/dhyeyinf/Face_Identification/blob/63236da38d41085263c6bcd26b3e348b53b3dd13/MAIN">Code</a> | <a href="https://www.kaggle.com/datasets/jessicali9530/lfw-dataset">Dataset</a>  | <a href="https://www.canva.com/design/DAGDB88WjTU/z0fgel_-9dMcWjzGXfI4Lw/view?utm_content=DAGDB88WjTU&utm_campaign=designshare&utm_medium=link&utm_source=editor">Slides</a> | <a href="https://www.youtube.com/watch?v=M8JcMv7Rznw">Project Video</a>|</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container" style="margin: 0 auto;">
+        <table style="width: 50%; max-width: 500px; margin: 0 auto; border: 5px solid;">
+            <tbody>
+                <tr>
+                    <div id="imageCarousel" class="carousel slide teaser-carousel" data-ride="carousel" data-interval="5000">
+                        <div class="carousel-inner">
+                            <!-- White horse -->
+                            <div class="carousel-item active">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/3e/37/04/3e3704857711cc394c66ea89bddba31f.jpg" />
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/5b/bb/b7/5bbbb7312cd9c940071bbbc3237d5dd3.jpg" />
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/1d/a5/35/1da535bb6d39a7dd83129dd3d3d5bd39.jpg" />
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/1d/a5/35/1da535bb6d39a7dd83129dd3d3d5bd39.jpg" />
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/c1/59/3f/c1593f1007ff5646883d1175b6f23eb0.jpg" />
+                                </div>
+                            </div>
+                        </div>
+                            <div class="carousel-item">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/bf/67/1a/bf671af49084dbc34a616fb1da525b02.jpg" />
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                            <div class="carousel-item">
+                                <div>
+                                    <img class="teaser-img" src="https://i.pinimg.com/736x/08/23/aa/0823aae5def41a8245b720275661022b.jpg" />
+                                </div>
+                            </div>
+                        </div>
+    
+                        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        
+                        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </tr>
+                <!-- <tr> <br /> </tr> -->
+                <tr align="center"></tr>
+            </tbody>
+        </table>
+        <div style="text-align: justify;text-justify: inter-word;">
+        <p><span class="section"><b>Introduction</b></span> </p>
+        <p>In our increasingly digital world, the accurate identification of faces holds
+            significant importance across diverse fields. This project focuses on the
+            task of face identification, wherein a given face image is classified into one
+            of several predefined classes.
+            We employ three distinct feature extraction techniques – Local Binary
+            Patterns (LBP), Histogram of Oriented Gradients (HoG), and Convolu-
+            tional Neural Networks (CNNs) ,Linear Discriminant Ananlysis (LDA) and
+            Principal Component Ananlysis (PCA) – to capture unique facial charac-
+            teristics.
+            Our aim is to compare the effectiveness of these techniques in identifying
+            faces using the Labeled Faces in the Wild (LFW) dataset sourced from
+            Kaggle. This dataset, provides a comprehensive collection of labeled face
+            images suitable for training and evaluation.
+            Throughout this report, we detail the implementation of each feature
+            extraction method, the experimental setup, and the comparative analy-
+            sis of their performance in face identification. This project serves as a
+            valuable exploration of multimodal feature analysis in the context of facial
+            recognition, offering insights into its potential applications and limitations.
+            2</p>
+        </div>
+        <div style="text-align: justify;text-justify: inter-word;">
+        <p><b>Keywords:</b>Local binary pattern, HOG, PCA, LDA, CNN, SVM, Random Forest, Gradient Booster, Logistic regression, Web Dev, Image uploading </p>
+        </div>
+        <p class="section">&nbsp;</p>
+
+        <p class="section"><b>The Problem Statement</b></p>
+        <div style="text-align: center">
+            <img src="./resources/intro.png" alt="" width="700px" style="margin: auto" />
+            <br><br><p>Face Identification: Identify a face image by classifying to one of K classes.
+
+                Extract LBP, HoG and CNN Features using the code provided and com-
+                pare different techniques.</p>
+        </div>
+        <p class="section">&nbsp;</p>
+
+        <p class="section"><b>Images in Dataset</b></p>
+        <div style="text-align: center">
+            <img src="https://imgs.search.brave.com/GURhZxj9rakdIGi_AWoXoNsym7LIPP_DNHvXUpaTmXk/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9kM2Qw/MHN3eWhyNjduZC5j/bG91ZGZyb250Lm5l/dC93MTIwMGgxMjAw/L2NvbGxlY3Rpb24v/UE9XL1BPVy9QT1df/UE9XXzY3OTEtMDAx/LmpwZw" alt="" width="400px" height="300px" style="margin: auto" /><br>
+            <br><br><p>Examples of Images.</p>
+        </div>
+        <p class="section">&nbsp;</p>
+
+<p class="section"><b>Project Video</b></p>
+<centre>
+<iframe width="667" height="500" src="https://www.youtube.com/embed/lKZAPOM0FX4">
+</iframe>
+</centre>
+
+</table>
+
+ <p class="section">&nbsp;</p>
+        <p class="section">&nbsp;</p>
+        <div class="team">
+            <p class="section" id="team"><b>Team</b></p>
+  <div class="row justify-content-center">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                     <div class="mainflip">
+                           <div class="card">
+                              <div class="card-body text-center card-no-padding">
+                                 <p><img class=" img-fluid" src="https://i.pinimg.com/474x/b9/01/66/b90166ceeaa26aac6953b3bdb7de6f38.jpg" alt="card image" width="300px" height="300px"></p>
+                                 <h5 class="card-title">Akshat <br> Patidar</h5>
+                                 <ul class="list-inline">
+                                   <li class="list-inline-item">
+                                      <a class="social-icon text-xs-center" target="_blank" href="https://www.linkedin.com/in/akspshat/">
+                                      <i class="fa fa-linkedin"></i>
+                                      </a>
+                                   </li>
+                                 </ul>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                     <div class="mainflip">
+                           <div class="card">
+                              <div class="card-body text-center card-no-padding">
+                                 <p><img class=" img-fluid" src="https://i.pinimg.com/474x/b3/d0/ca/b3d0caad8644480c1fe879a29fc4c07b.jpg" alt="card image" width="300px" height="300px"></p>
+                                 <h5 class="card-title">Manas <br> Chechani</h5>
+                                 <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                     <li class="list-inline-item">
+                                      <a class="social-icon text-xs-center" target="_blank" href="https://www.linkedin.com/in/manas-chechani-1452ab253/">
+                                      <i class="fa fa-linkedin"></i>
+                                      </a>
+                                   </li>
+                                        </a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+
+                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                     <div class="mainflip">
+                           <div class="card">
+                              <div class="card-body text-center card-no-padding">
+                                 <p><img class=" img-fluid" src="https://i.pinimg.com/474x/5f/5a/56/5f5a5697499eae69e80abd7b91a496ca.jpg" alt="card image" width="300px" height="300px"></p>
+                                 <h5 class="card-title">Dhyey Findoriya</h5>
+                                 <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                     <a class="social-icon text-xs-center" target="_blank" href="https://www.linkedin.com/in/dhyey-findoriya-749097259/">
+                                     <i class="fa fa-linkedin"></i>
+                                     </a>
+                                  </li>
+                                 </ul>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+
+
+  
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                     <div class="mainflip">
+                           <div class="card">
+                              <div class="card-body text-center card-no-padding">
+                                 <p><img class=" img-fluid" src="https://i.pinimg.com/474x/a2/ab/95/a2ab9569d8101b982ab9b381afcdf116.jpg" alt="card image" width="300px" height="300px"></p>
+                                 <h5 class="card-title">Nisarg <br> Vaghela</h5>
+                                 <ul class="list-inline">
+                                     <li class="list-inline-item">
+                                        <a class="social-icon text-xs-center" target="_blank" href="https://www.linkedin.com/in/nisarg-vaghela-3777081aa/">
+                                        <i class="fa fa-linkedin"></i>
+                                        </a>
+                                     </li>
+                                 </ul>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                     <div class="mainflip">
+                           <div class="card">
+                              <div class="card-body text-center card-no-padding">
+                                 <p><img class=" img-fluid" src="https://i.pinimg.com/474x/db/62/97/db62979dbfc24136466db6966129c731.jpg" alt="card image" width="300px" height="300px"></p>
+                                 <h5 class="card-title">Ankit<br> Raj</h5>
+                                 <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                     <a class="social-icon text-xs-center" target="_blank" href="https://www.linkedin.com/in/ankit-raj-3311582b2/">
+                                     <i class="fa fa-linkedin"></i>
+                                     </a>
+                                  </li>
+                                 </ul>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+   
+
+
+
+     </div>
+        <p class="section">&nbsp;</p>
+
+ <p class="section">&nbsp;</p>
+        <p class="section">&nbsp;</p>
+        <div class="ack">
+            <p class="section" id="ack"><b>Acknowledgment</b></p>
+            We extend our sincere gratitude to all those who contributed to the completion of this project. 
+
+            We would like to thank the members of our team whose dedication and hard work were instrumental in the success of this project. Each team member brought unique skills and perspectives, contributing to the project's diverse range of ideas and solutions.
+            
+            Our gratitude also goes to [Name(s) of Funding Agencies or Sponsors] for their financial support, without which this project would not have been possible. Their belief in our vision provided the foundation upon which we built our work.
+                       
+            We would also like to extend our heartfelt appreciation to Professor Anand Mishra for his outstanding teaching and mentorship in Pattern Recognition and Machine Learning (PRML). His expertise and guidance were invaluable in shaping our understanding of the subject matter and directly contributed to the success of this project.
+            
+            This project stands as a testament to the collaborative spirit and dedication of all those involved, and we are truly grateful for the opportunity to have been a part of it.	</div>
+        <p class="section"></p>
+
+
+    <!-- Footer -->
+<footer>
+    <p class="m-0 text-center">Copyright &copy; IIT Jodhpur Batch of 2026</p>
+    <!-- Footer -->
+    <button onclick="goBack()" style="margin-top: 10px;">Go Back</button>
+</footer>   
+
+<script>
+    // Function to navigate back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</footer>   
+
+</body>
+
+ <script>
+    function prompt_on(prompt_element) {
+        prompt_element.classList.add("caption-active");
+    }
+
+    function prompt_off(prompt_element) {
+        prompt_element.classList.remove("caption-active");
+    }
+
+    function toggle_prompt(active_prompt_id, inactive_prompt_ids, result_id) {
+        let active_prompt = document.getElementById(active_prompt_id);
+        prompt_on(active_prompt);
+        for (let i = 0; i < inactive_prompt_ids.length; i++) {
+            let inactive_prompt = document.getElementById(inactive_prompt_ids[i]);
+            prompt_off(inactive_prompt);
+        }
+
+        let result = document.getElementById(result_id);
+        result.src = file_paths[active_prompt_id];
+    }
+ </script>
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="prediction-container">
+    <h1>Prediction Result</h1>
+    <p>The predicted label is: <strong>{{ prediction }}</strong></p>
+    <p><a href="/">Back to Upload Page</a></p>
+  </div>
+</body>
+</html>

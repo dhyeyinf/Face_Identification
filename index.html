@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Face Identification</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* Center the prediction text */
+    #prediction-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="video-background">
+    <source src="https://cdn.pixabay.com/video/2024/03/15/204261-923846030_tiny.mp4" type="video/mp4">
+    <!-- Add additional source elements for different video formats if needed -->
+  </video>  
+  <div class="login">
+    <h1>Face Identification</h1>
+    <input type="file" id="fileInput2" name="image" accept="image/*" style="display: none;">
+    <div class="drop-area" id="drop-area">Drag & Drop Image Here</div>
+    <form action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data" style="display: none;" id="upload-form">
+      <input type="file" id="fileInput" name="image" accept="image/*" style="display: none;">
+      <div id="file-info"></div>
+      <div id="image-container">
+        <div id="image-preview"></div>
+        <div id="prediction-container">
+          <div id="prediction-result">
+          <div id="prediction-text" ></div> <!-- Updated placeholder for prediction text -->
+        </div>
+      </div>
+      <button type="submit" class="btn btn-cyber btn-block btn-large upload-button">Upload & Predict</button>
+    </form>
+
+  </div>
+  <div class="top-left-text">
+    PRML Project 
+  </div>  
+  <div id="widget-container">
+    <div id="widget-header">
+      <h2>Project Creators</h2>
+    </div>
+    <div id="widget-body">
+      <div class="creator">
+        <img src="https://i.pinimg.com/474x/b9/01/66/b90166ceeaa26aac6953b3bdb7de6f38.jpg" alt="Akshat" width="300px" height="300px">
+        <p>Akshat Patidar</p>
+        <p>B22EE087</p>
+    </div>
+    <div class="creator">
+        <img src="https://i.pinimg.com/474x/b3/d0/ca/b3d0caad8644480c1fe879a29fc4c07b.jpg" alt="Manas" width="300px" height="300px">
+        <p>Manas Chechani</p>
+        <p>B22AI053</p>
+    </div>
+    <div class="creator">
+        <img src="https://i.pinimg.com/474x/5f/5a/56/5f5a5697499eae69e80abd7b91a496ca.jpg" alt="Dhyey" width="300px" height="300px">
+        <p>Dhyey Findoriya</p>
+        <p>B22EE024</p>
+    </div>
+    <div class="creator">
+        <img src="https://i.pinimg.com/474x/a2/ab/95/a2ab9569d8101b982ab9b381afcdf116.jpg" alt="Nisarg Vaghela" width="300px" height="300px">
+        <p>Nisarg Vaghela</p>
+        <p>B22EE68</p>
+    </div>
+    <div class="creator">
+        <img src="https://i.pinimg.com/474x/db/62/97/db62979dbfc24136466db6966129c731.jpg" alt="Ankit" width="300px" height="300px">
+        <p>Ankit Raj</p>
+        <p>B22CS010</p>
+    </div>    
+    </div>    
+    <a href="/redirect" class="widget-link">About the creators</a>
+    <div id="widget-footer">
+      <h3>Important Links</h3>
+      <ul>
+        <li><a href="https://colab.research.google.com/drive/1OBgQLC0Q_41vVazid9a6jMEXN8UqhriD?authuser=0#scrollTo=_pO4A1XVLxie">Project Report</a></li>
+        <li><a href="https://github.com/dhyeyinf/Face_Identification/blob/63236da38d41085263c6bcd26b3e348b53b3dd13/MAIN">GitHub Repository</a></li>
+        <!-- Add more links as needed -->
+      </ul>
+    </div>
+  </div>  
+  <button id="show-widget">&#9650;</button> <!-- Up arrow button -->
+
+
+  <!-- Marquee for disclaimer -->
+  <div class="marquee">
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+      Disclaimer:This model is in progress and will become better as the days go on. Made by Manas, Akshat, Dhyey, Nisarg and Ankit.
+    </marquee>
+  </div>
+
+  <script>
+    var dropArea = document.getElementById('drop-area');
+    var uploadForm = document.getElementById('upload-form');
+    var fileInput = document.getElementById('fileInput');
+    var fileInput2 = document.getElementById('fileInput2');
+    var fileInfo = document.getElementById('file-info');
+    var imagePreview = document.getElementById('image-preview');
+    var predictionText = document.getElementById('prediction-text'); // Reference to prediction text element
+    
+    dropArea.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      dropArea.style.backgroundColor = '#f0f0f0';
+    });
+
+    dropArea.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      dropArea.style.backgroundColor = '#ffffff';
+    });
+
+    dropArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      dropArea.style.backgroundColor = '#ffffff';
+      fileInput.files = e.dataTransfer.files;
+      uploadForm.style.display = 'block';
+      displayFileInfo();
+    });
+
+    fileInput2.addEventListener('change', function() {
+      if (fileInput2.files.length > 0) {
+        uploadForm.style.display = 'block';
+        displayFileInfo();
+      }
+    });
+
+    fileInput.addEventListener('change', function() {
+      displayFileInfo();
+    });
+
+    function displayFileInfo() {
+      var file = fileInput.files[0] || fileInput2.files[0];
+      if (file) {
+        var fileName = file.name;
+        fileInfo.textContent = 'Selected image: ' + fileName;
+        
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          var img = document.createElement('img');
+          img.src = event.target.result;
+          img.style.maxWidth = '100%'; // Limit image width
+          imagePreview.innerHTML = ''; // Clear previous image
+          imagePreview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // JavaScript to handle up arrow click
+    var showWidgetButton = document.getElementById('show-widget');
+var widgetContainer = document.getElementById('widget-container');
+var originalBottomPosition = 50; // Adjust as needed, this should be the original bottom position of the arrow button
+
+showWidgetButton.addEventListener('click', function() {
+    // Toggle the visibility of the widget container by changing its bottom position
+    if (widgetContainer.style.bottom === '-100%') {
+        widgetContainer.style.bottom = '0'; // Bring the widget up
+        showWidgetButton.classList.add('up'); // Add 'up' class to the showWidgetButton
+        showWidgetButton.style.cursor = 'url("down_arrow.png"), auto'; // Change cursor to down arrow when widget is up
+        showWidgetButton.style.bottom = 'calc(55% - ' + originalBottomPosition + 'px)'; // Move the arrow button up
+    } else {
+        widgetContainer.style.bottom = '-100%'; // Hide the widget
+        showWidgetButton.classList.remove('up'); // Remove 'up' class from the showWidgetButton
+        showWidgetButton.style.cursor = 'url("up_arrow.png"), auto'; // Change cursor to up arrow when widget is down
+        showWidgetButton.style.bottom = originalBottomPosition + 'px'; // Move the arrow button down to its original position
+    }
+});
+
+
+
+
+    // Function to update prediction text
+    function updatePredictionText(text) {
+      predictionText.textContent = text;
+    }
+
+    uploadForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      
+      // Get the selected image file
+      var file = fileInput.files[0] || fileInput2.files[0];
+      
+      if (file) {
+        // Create FormData object to send file data
+        var formData = new FormData();
+        formData.append('image', file);
+        
+        // Log the URL being used for the fetch request
+        console.log('Fetching URL:', '/predict');
+        
+        // Send image data to Flask backend for prediction
+        fetch('/predict', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          // Log the response status
+          console.log('Response status:', response.status);
+          return response.text();
+        })
+        .then(prediction => {
+          // Update HTML to display prediction result
+          updatePredictionText(prediction);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          updatePredictionText('An error occurred while processing the image');
+        });
+      }
+    });
+
+  </script>
+</body>
+</html>
