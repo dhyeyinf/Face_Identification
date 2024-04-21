@@ -430,3 +430,64 @@ hog_test_features = extract_hog_features(X_test_filtered)
 import numpy as np
 np.save('hog_train_features.npy', hog_train_features)
 np.save('hog_test_features.npy', hog_test_features)
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Define classifiers
+classifiers = {
+    # "SVM": SVC(),
+    "Random Forest": RandomForestClassifier(),
+    "KNN": KNeighborsClassifier(),
+    "Logistic Regression": LogisticRegression(max_iter=3000)  # Adjust max_iter if needed
+}
+
+# Train and test each classifier
+for clf_name, clf in classifiers.items():
+    clf.fit(hog_train_features, y_train_filtered)
+
+    # Training accuracy
+    train_pred = clf.predict(hog_train_features)
+    train_accuracy = accuracy_score(y_train_filtered, train_pred)
+
+    # Testing accuracy
+    test_pred = clf.predict(hog_test_features)
+    test_accuracy = accuracy_score(y_test_filtered, test_pred)
+
+    print(f"{clf_name} Classifier:")
+    print("Training Accuracy:", train_accuracy)
+    print("Testing Accuracy:", test_accuracy)
+    print()
+
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+hog_train_features = hog_train_features.reshape(X_train_filtered.shape[0], -1)
+hog_test_features = hog_test_features.reshape(X_test_filtered.shape[0], -1)
+
+lda = LDA(n_components=6)
+X_train_lda = lda.fit_transform(hog_train_features, y_train_filtered)
+X_test_lda = lda.transform(hog_test_features)
+
+classifiers = {
+    'SVM': SVC(),
+    'Random Forest': RandomForestClassifier(),
+    'KNN': KNeighborsClassifier(),
+    'Gradient Boosting': GradientBoostingClassifier()
+}
+
+for clf_name, clf in classifiers.items():
+    clf.fit(X_train_lda, y_train_filtered)
+    y_pred = clf.predict(X_test_lda)
+    accuracy = accuracy_score(y_test_filtered, y_pred)
+    print(f"{clf_name} accuracy:", accuracy)
+
