@@ -557,3 +557,104 @@ for clf_name, clf in classifiers.items():
     print("Training Accuracy:", train_accuracy)
     print("Testing Accuracy:", test_accuracy)
     print()
+from sklearn.decomposition import PCA
+
+def extract_pca_features(images, n_components=None):
+    # Reshape the images into a 2D array
+    flattened_images = images.reshape(len(images), -1)
+    pca = PCA(n_components=n_components)
+    # Apply PCA directly to the 2D array
+    pca_features = pca.fit_transform(flattened_images)
+    return pca_features
+
+import matplotlib.pyplot as plt
+
+def plot_cumulative_variance_ratio(images, threshold_range=(0.1, 0.95), step=0.05):
+    flattened_images = images.reshape(len(images), -1)
+    pca = PCA()
+    pca.fit(flattened_images)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+
+    thresholds = np.arange(*threshold_range, step=step)
+    n_components_list = []
+    cumulative_variance_list = []
+
+    for threshold in thresholds:
+        n_components = np.argmax(cumulative_variance_ratio >= threshold) + 1
+        n_components = min(n_components, min(flattened_images.shape))
+        n_components_list.append(n_components)
+        cumulative_variance_list.append(cumulative_variance_ratio[n_components - 1])
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(n_components_list, cumulative_variance_list, marker='o')
+    plt.xlabel('Number of Components')
+    plt.ylabel('Cumulative Explained Variance Ratio')
+    plt.title('Cumulative Explained Variance Ratio vs. Number of Components')
+    plt.grid(True)
+    plt.show()
+
+try:
+    plot_cumulative_variance_ratio(X_train_filtered)
+except ValueError as e:
+    print(f"Error: {e}")
+
+
+from sklearn.decomposition import PCA
+
+def find_optimal_n_components(images, threshold=0.85):
+    flattened_images = images.reshape(len(images), -1)
+    pca = PCA()
+    pca.fit(flattened_images)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+
+    n_components = np.argmax(cumulative_variance_ratio >= threshold) + 1
+    n_components = min(n_components, min(flattened_images.shape))
+    n_components = min(n_components, min(flattened_images.shape))
+    return n_components
+
+optimal_n_components = find_optimal_n_components(X_train_filtered)
+print("Optimal number of components:", optimal_n_components)
+
+pca_train_features = extract_pca_features(X_train_filtered, optimal_n_components)
+pca_test_features = extract_pca_features(X_test_filtered, optimal_n_components)
+
+np.save('pca_train_features.npy', pca_train_features)
+np.save('pca_test_features.npy', pca_test_features)
+
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Define classifiers
+classifiers = {
+    "SVM": SVC(),
+    "Random Forest": RandomForestClassifier(),
+    "KNN": KNeighborsClassifier(),
+    "Gradient Boosting": GradientBoostingClassifier(),
+    "Logistic Regression": LogisticRegression(max_iter=1000)  # Adjust max_iter if needed
+}
+
+# Train and test each classifier
+for clf_name, clf in classifiers.items():
+    clf.fit(pca_train_features, y_train_filtered)
+
+    # Training accuracy
+    train_pred = clf.predict(pca_train_features)
+    train_accuracy = accuracy_score(y_train_filtered, train_pred)
+
+    # Testing accuracy
+    test_pred = clf.predict(pca_test_features)
+    test_accuracy = accuracy_score(y_test_filtered, test_pred)
+
+    print(f"{clf_name} Classifier:")
+    print("Training Accuracy:", train_accuracy)
+    print("Testing Accuracy:", test_accuracy)
+    print()
+
