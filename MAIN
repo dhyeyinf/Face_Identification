@@ -491,3 +491,69 @@ for clf_name, clf in classifiers.items():
     accuracy = accuracy_score(y_test_filtered, y_pred)
     print(f"{clf_name} accuracy:", accuracy)
 
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.applications import ResNet50
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.models import Model
+
+def extract_cnn_features(images):
+    base_model = ResNet50(weights='imagenet', include_top=False)
+
+    # Create a model with outputs from one of the intermediate layers
+    model = Model(inputs=base_model.input, outputs=base_model.get_layer('conv5_block3_out').output)
+
+    cnn_features = []
+    for img in images:
+        # Preprocess the image
+        img = image.img_to_array(img)
+        img = np.expand_dims(img, axis=0)
+        img = preprocess_input(img)
+
+        # Extract features
+        features = model.predict(img)
+        cnn_features.append(features.flatten())  # Flatten the features
+
+    return np.array(cnn_features)
+
+
+cnn_train_features = extract_cnn_features(X_train_filtered)
+cnn_test_features = extract_cnn_features(X_test_filtered)
+
+np.save('cnn_train_features.npy', cnn_train_features)
+np.save('cnn_test_features.npy', cnn_test_features)
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Initialize classifiers
+classifiers = {
+    "SVM": SVC(),
+    "Random Forest": RandomForestClassifier(),
+    "KNN": KNeighborsClassifier(),
+    # "Gradient Boosting": GradientBoostingClassifier(),
+    "Logistic Regression": LogisticRegression(max_iter=3000)  # Adjust max_iter if needed
+}
+
+# Training and testing each classifier
+for clf_name, clf in classifiers.items():
+    clf.fit(cnn_train_features, y_train_filtered)
+
+    # Training accuracy
+    train_pred = clf.predict(cnn_train_features)
+    train_accuracy = accuracy_score(y_train_filtered, train_pred)
+
+    # Testing accuracy
+    test_pred = clf.predict(cnn_test_features)
+    test_accuracy = accuracy_score(y_test_filtered, test_pred)
+
+    print(f"{clf_name} Classifier:")
+    print("Training Accuracy:", train_accuracy)
+    print("Testing Accuracy:", test_accuracy)
+    print()
