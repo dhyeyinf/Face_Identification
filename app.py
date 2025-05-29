@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import joblib
+import pandas as pd
 import numpy as np
 from PIL import Image
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
